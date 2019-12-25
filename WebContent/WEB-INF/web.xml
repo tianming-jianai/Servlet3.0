@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+	id="WebApp_ID" version="3.0" metadata-complete="true">
+	
+	<!-- 注意：
+		<web-app/>中的属性metadata-complete的值若为true，则表示对三大组件的注册方式，只有web.xml中的注册起作用，将忽略注解的注册；
+		若为false，则表示两种注册方式同时起作用。默认false
+	 -->
+  
+
+	<!-- 注册Servlet：
+		若对于Servlet采用了两种方式同时进行注册，则需要注意：
+		1.若两种方式的url-pattern值相同，则应用无法启动
+		2.若两种方式的url-pattern值不同，那么相当于该Servlet有两个url-pattern
+	 -->
+  <servlet>
+  	<servlet-name>Some-Servlet</servlet-name>
+  	<servlet-class>com.fuan.servlet.SomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Some-Servlet</servlet-name>
+  	<url-pattern>/xxx</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 注册Filter
+  		若对于Filter采用了两种方式同时进行注册，则需要注意：
+  		无论url-pattern的值是否相同，其都是作为两个独立的Filter出现的。
+   -->
+  <filter>
+  	<filter-name>SomeFilter</filter-name>
+  	<filter-class>com.fuan.filter.SomeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SomeFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 注册Listener
+  		若对于Listener采用了两种方式同时进行注册，其仅仅是相当于一个Listener
+   -->
+  <listener>
+  	<listener-class>com.fuan.listener.SomeListener</listener-class>
+  </listener>
+</web-app>
